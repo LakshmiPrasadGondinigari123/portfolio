@@ -111,3 +111,25 @@
     requestAnimationFrame(draw);
   })();
 })();
+
+// ---- v2: certificate filter, lightbox, cursor spotlight ----
+(() => {
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  $$('#cfilters button').forEach(b => b.onclick = () => {
+    $$('#cfilters button').forEach(x => x.classList.toggle('on', x === b));
+    $$('.cg').forEach(c => c.classList.toggle('hide', b.dataset.f !== 'all' && !c.dataset.c.split(' ').includes(b.dataset.f)));
+  });
+  const lb = $('#lb'), li = $('#lbi'), lc = $('#lbc');
+  const close = () => { lb.hidden = true; document.body.style.overflow = ''; };
+  $$('button.cimg').forEach(b => b.onclick = () => {
+    li.src = b.dataset.src; li.alt = b.dataset.cap; lc.textContent = b.dataset.cap;
+    lb.hidden = false; document.body.style.overflow = 'hidden';
+  });
+  $('#lbx').onclick = close;
+  lb.onclick = e => { if (e.target === lb) close(); };
+  addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  if (matchMedia('(hover:hover)').matches) {
+    const s = document.createElement('div'); s.className = 'spot'; document.body.appendChild(s);
+    addEventListener('mousemove', e => { s.style.left = e.clientX + 'px'; s.style.top = e.clientY + 'px'; }, { passive: true });
+  }
+})();
