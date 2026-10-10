@@ -133,3 +133,40 @@
     addEventListener('mousemove', e => { s.style.left = e.clientX + 'px'; s.style.top = e.clientY + 'px'; }, { passive: true });
   }
 })();
+
+// ---- reliable email: if no mail app opens, copy the address and offer Gmail ----
+(() => {
+  const TO = 'gondinigarilakshmiprasad996@gmail.com';
+  let box;
+  const toast = (html) => {
+    if (!box) { box = document.createElement('div'); box.className = 'mail-toast'; box.setAttribute('role', 'status'); document.body.appendChild(box); }
+    box.innerHTML = html; box.classList.add('show');
+    clearTimeout(toast.t); toast.t = setTimeout(() => box.classList.remove('show'), 9000);
+  };
+  const copy = (text) => {
+    try { if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).then(() => true, () => false); } catch (e) {}
+    return Promise.resolve(false);
+  };
+  const gmail = (subject, body) => 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(TO) +
+    (subject ? '&su=' + encodeURIComponent(subject) : '') + (body ? '&body=' + encodeURIComponent(body) : '');
+  const fallback = (subject, body) => {
+    // If a mail app took over, the page loses focus / becomes hidden. If not, offer alternatives.
+    setTimeout(async () => {
+      if (document.hidden || !document.hasFocus()) return;
+      const ok = await copy(TO);
+      toast('<b>' + (ok ? 'Email address copied ✓' : 'No mail app opened') + '</b><span>' + TO + '</span>' +
+        '<a href="' + gmail(subject, body) + '" target="_blank" rel="noopener">Open in Gmail ↗</a>');
+    }, 900);
+  };
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('a[href^="mailto:"]');
+    if (!a) return;
+    const q = new URLSearchParams((a.getAttribute('href').split('?')[1] || ''));
+    fallback(q.get('subject') || '', q.get('body') || '');
+  });
+  const form = document.getElementById('form');
+  if (form) form.addEventListener('submit', () => {
+    const f = new FormData(form);
+    fallback('Portfolio message from ' + f.get('name'), f.get('msg') + '\n\n— ' + f.get('name') + ' (' + f.get('email') + ')');
+  });
+})();
