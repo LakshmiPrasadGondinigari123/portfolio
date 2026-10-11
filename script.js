@@ -248,7 +248,7 @@
     btn.disabled = false; say('');
     form.innerHTML = `<div class="reg-done"><div style="font-size:2.6rem">🎉</div>
       <h3>${saved ? "You're registered, " + d.name.split(' ')[0] + '!' : 'One more step, ' + d.name.split(' ')[0]}</h3>
-      <p>${saved ? 'Tap below to confirm on WhatsApp and get the batch details and class link.'
+      <p>${saved ? 'A confirmation email is on its way to ' + d.email + '. Tap below to confirm on WhatsApp and get the batch details and class link.'
                  : 'Tap below to send your registration on WhatsApp so I can add you to the batch.'}</p>
       <a class="btn wa-btn" target="_blank" rel="noopener" href="${waLink(msg)}">Confirm on WhatsApp</a></div>`;
   });
