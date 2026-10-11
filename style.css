@@ -239,3 +239,41 @@ form select:focus{border-color:var(--b);box-shadow:0 0 0 3px color-mix(in srgb,v
 .wa:hover{transform:scale(1.06)}
 @media(max-width:860px){.classes-grid{grid-template-columns:1fr}}
 @media(max-width:560px){.course-list{grid-template-columns:1fr}.wa span{display:none}.wa{width:48px;padding:0;justify-content:center}}
+
+.live{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:8px 16px;border:1px solid var(--bd);border-radius:99px;background:var(--card);font-size:.9rem}
+.live b{font:700 1.1rem 'Space Grotesk';background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.live span:last-child{color:var(--mut)}
+.feed{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.feed li{font-size:.85rem;color:var(--mut);padding-left:14px;position:relative;animation:fin .5s ease}
+.feed li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--c)}
+.feed li b{color:var(--tx);font-weight:600}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}}
+
+/* ---- classes v3: hero art, course cards, steps ---- */
+.cl-hero{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;padding:42px;border-radius:28px;border:1px solid var(--bd);
+  background:radial-gradient(circle at 85% 20%,color-mix(in srgb,var(--a) 22%,transparent),transparent 55%),var(--card);backdrop-filter:blur(10px);margin-bottom:56px}
+.cl-copy h2{font-size:clamp(1.8rem,3.6vw,2.7rem);letter-spacing:-.02em;margin-bottom:14px}
+.cl-art{width:100%;height:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.25))}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.pills li{font-size:.82rem;padding:5px 12px;border-radius:99px;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c);border:1px solid color-mix(in srgb,var(--c) 35%,transparent)}
+.cl-copy .cta{margin:24px 0 8px}
+.classes-grid{grid-template-columns:1.15fr .85fr;gap:40px}
+.sub{font-size:1.25rem;margin:0 0 18px}
+.course-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:44px}
+.cc{display:flex;gap:14px;align-items:center;padding:14px;border:1px solid var(--bd);border-radius:16px;background:var(--card);transition:.25s}
+.cc:hover{transform:translateY(-4px);border-color:var(--b);box-shadow:0 18px 40px -24px var(--b)}
+.cc img{flex:none;border-radius:16px}
+.cc h4{font-family:'Space Grotesk';font-size:1rem;line-height:1.25}
+.cc p{font-size:.82rem;color:var(--mut);line-height:1.45;margin:3px 0 0}
+.steps{display:grid;gap:12px}
+.steps li{display:flex;gap:16px;align-items:flex-start;padding:16px;border:1px solid var(--bd);border-radius:16px;background:var(--card)}
+.steps b{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--grad);color:#fff;font-family:'Space Grotesk'}
+.steps h4{font-family:'Space Grotesk';line-height:1.3}.steps p{font-size:.88rem;color:var(--mut);margin:2px 0 0}
+.side{position:sticky;top:90px;display:grid;gap:16px}
+#reg{box-shadow:0 30px 70px -40px var(--a);border-color:color-mix(in srgb,var(--a) 45%,var(--bd))}
+.inst{display:flex;gap:14px;align-items:center;padding:14px 16px}
+.inst img{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:50% 25%;flex:none;border:2px solid var(--a)}
+.inst b{font-family:'Space Grotesk'}.inst small{display:block;color:var(--mut);font-size:.78rem;line-height:1.4;margin-top:2px}
+@media(max-width:900px){.cl-hero{grid-template-columns:1fr;padding:26px}.classes-grid{grid-template-columns:1fr}.side{position:static}.cl-art{order:-1;max-width:420px;margin:auto}}
+@media(max-width:520px){.course-grid{grid-template-columns:1fr}}
+.live[hidden]{display:none}

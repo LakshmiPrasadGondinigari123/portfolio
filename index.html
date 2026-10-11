@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=reg1">
+<link rel="stylesheet" href="style.css?v=reg4">
 </head>
 <body>
 <div class="progress" id="progress"></div>
@@ -112,20 +112,32 @@
 <!-- FREE CLASSES -->
 <section id="classes">
   <div class="wrap">
-    <h2 class="title reveal"><small>free classes</small>Learn SQL, Python, ML &amp; GenAI. Free.</h2>
-    <div class="classes-grid">
-      <div class="reveal">
-        <p class="lead">Beginner-friendly, hands-on sessions taught by a working GenAI developer. Pick your topic, register in 30 seconds, and I'll message you on WhatsApp with the batch details.</p>
-        <ul class="course-list">
-          <li><span>🗄️</span><div><b>SQL</b><small>Queries, joins, window functions, real datasets</small></div></li>
-          <li><span>🐍</span><div><b>Python</b><small>From basics to Pandas, NumPy and automation</small></div></li>
-          <li><span>📈</span><div><b>Machine Learning</b><small>Scikit-learn, model building and evaluation</small></div></li>
-          <li><span>🧠</span><div><b>Deep Learning</b><small>Neural networks, TensorFlow, computer vision</small></div></li>
-          <li><span>🤖</span><div><b>Artificial Intelligence</b><small>Concepts, NLP and practical AI projects</small></div></li>
-          <li><span>✨</span><div><b>Generative AI</b><small>LLMs, prompt engineering, LangChain, agents</small></div></li>
-        </ul>
+    <div class="cl-hero reveal">
+      <div class="cl-copy">
+        <p class="eyebrow"><span class="dot"></span> Registrations open · 100% free</p>
+        <h2>Learn <span class="grad">SQL, Python, ML &amp; GenAI</span> with a working AI developer.</h2>
+        <p class="lead">Live, beginner-friendly classes with hands-on practice. Register in 30 seconds and get your batch details on WhatsApp.</p>
+        <ul class="pills"><li>✓ Free</li><li>✓ Beginner friendly</li><li>✓ Live doubt solving</li><li>✓ Real projects</li></ul>
+        <div class="cta"><a class="btn primary" href="#reg">Reserve my free seat</a><a class="btn ghost" href="#syllabus">See what you'll learn</a></div>
+        <div class="live" id="live" hidden><span class="dot"></span><b id="liveCount">0</b><span id="liveText">students registered</span></div>
+        <ul class="feed" id="feed" aria-live="polite"></ul>
       </div>
-      <form class="card reveal" id="reg" novalidate>
+      <img class="cl-art" src="img/classes-hero.svg" alt="Laptop showing SQL and Python code with charts and a neural network" width="640" height="380">
+    </div>
+
+    <div class="classes-grid">
+      <div>
+        <h3 class="sub reveal" id="syllabus">What you'll learn</h3>
+        <div class="course-grid reveal"><article class="cc"><img src="img/sql.svg" alt="" width="56" height="56" loading="lazy"><div><h4>SQL</h4><p>Queries, joins, window functions on real datasets</p></div></article><article class="cc"><img src="img/python.svg" alt="" width="56" height="56" loading="lazy"><div><h4>Python</h4><p>Basics to Pandas, NumPy and automation</p></div></article><article class="cc"><img src="img/ml.svg" alt="" width="56" height="56" loading="lazy"><div><h4>Machine Learning</h4><p>Scikit-learn, model building and evaluation</p></div></article><article class="cc"><img src="img/dl.svg" alt="" width="56" height="56" loading="lazy"><div><h4>Deep Learning</h4><p>Neural networks, TensorFlow, computer vision</p></div></article><article class="cc"><img src="img/ai.svg" alt="" width="56" height="56" loading="lazy"><div><h4>Artificial Intelligence</h4><p>Core concepts, NLP and practical AI projects</p></div></article><article class="cc"><img src="img/genai.svg" alt="" width="56" height="56" loading="lazy"><div><h4>Generative AI</h4><p>LLMs, prompt engineering, LangChain, agents</p></div></article></div>
+        <h3 class="sub reveal">How it works</h3>
+        <ol class="steps reveal">
+          <li><b>1</b><div><h4>Register</h4><p>Fill the short form. It takes 30 seconds.</p></div></li>
+          <li><b>2</b><div><h4>Confirm on WhatsApp</h4><p>One tap and you get the batch time and class link.</p></div></li>
+          <li><b>3</b><div><h4>Attend &amp; build</h4><p>Learn live, practise, and ask doubts directly.</p></div></li>
+        </ol>
+      </div>
+      <aside class="side">
+        <form class="card" id="reg" novalidate>
         <h3>Reserve your free seat</h3>
         <label>Full name<input name="name" autocomplete="name" required placeholder="Your name"></label>
         <label>WhatsApp number<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+91 98765 43210"></label>
@@ -153,6 +165,11 @@
         <button class="btn primary" type="submit" id="regbtn">Register for free</button>
         <p class="note" id="regnote" role="status"></p>
       </form>
+        <div class="inst card">
+          <img src="photo.jpg" alt="Lakshmi Prasad Gondinigari" width="72" height="72" onerror="this.remove()">
+          <div><b>Lakshmi Prasad Gondinigari</b><small>Python &amp; GenAI Developer @ EXL · Claude Certified Architect · MCA 9.24 CGPA</small></div>
+        </div>
+      </aside>
     </div>
   </div>
 </section>
@@ -408,6 +425,6 @@
 <a class="wa" id="wa" href="https://wa.me/918179028339" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3C9 3 3.4 8.6 3.4 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-1.9a12.5 12.5 0 0 0 5.6 1.4c6.9 0 12.6-5.600 12.600-12.500S22.900 3 16 3Zm0 22.800c-1.800 0-3.500-.5-5-1.400l-.4-.2-4.400 1.100 1.200-4.200-.3-.4a10.200 10.200 0 0 1-1.600-5.500c0-5.700 4.600-10.200 10.300-10.200S26.100 9.800 26.100 15.500 21.700 25.800 16 25.800Zm5.600-7.600c-.3-.2-1.800-.9-2.100-1s-.5-.2-.7.200-.8 1-1 1.200-.4.200-.7.100a8.300 8.300 0 0 1-4.100-3.600c-.3-.5.300-.5.900-1.600.1-.2 0-.4 0-.5l-1-2.300c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400s-1 1-1 2.500 1.100 2.900 1.200 3.100 2.100 3.200 5.100 4.500c1.900.8 2.600.9 3.600.7.600-.1 1.800-.7 2-1.400s.2-1.300.2-1.400-.3-.2-.6-.4Z"/></svg><span>Chat on WhatsApp</span></a>
 <a class="hire" href="#contact">👋 Hire me</a>
 <button class="top" id="top" aria-label="Back to top">↑</button>
-<script src="script.js?v=reg1"></script>
+<script src="script.js?v=reg4"></script>
 </body>
 </html>

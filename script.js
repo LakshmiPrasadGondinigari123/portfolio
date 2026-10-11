@@ -185,6 +185,28 @@
   const waLink = (text) => 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(text);
   document.getElementById('wa').href = waLink('Hi Lakshmi Prasad, I saw your website and I am interested in the free classes.');
 
+  // Live stats from the real sheet (count + latest first names). Hidden until there is real data.
+  const ago = iso => {
+    const m = Math.max(0, Math.round((Date.now() - new Date(iso)) / 60000));
+    if (m < 1) return 'just now'; if (m < 60) return m + ' min ago';
+    const h = Math.round(m / 60); if (h < 24) return h + ' h ago';
+    const d = Math.round(h / 24); return d + (d === 1 ? ' day ago' : ' days ago');
+  };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  async function stats() {
+    if (!SHEET_URL) return;
+    try {
+      const r = await (await fetch(SHEET_URL + '?t=' + Date.now())).json();
+      const live = document.getElementById('live');
+      document.getElementById('liveCount').textContent = r.count;
+      document.getElementById('liveText').textContent = r.count === 1 ? 'student registered' : 'students registered';
+      live.hidden = r.count < 1;
+      document.getElementById('feed').innerHTML = (r.recent || []).slice(0, 3).map(x =>
+        `<li><b>${esc(x.name)}</b> registered for ${esc(x.course)} · ${ago(x.at)}</li>`).join('');
+    } catch (err) { /* stay hidden if the sheet is unreachable */ }
+  }
+  stats(); setInterval(stats, 30000);
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const f = new FormData(form);
@@ -209,7 +231,7 @@
       try {
         // no-cors: the Apps Script reply is opaque, but the row is written
         await fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams({ ...d, page: location.href }) });
-        saved = true;
+        saved = true; stats();
       } catch (err) { saved = false; }
     }
     btn.disabled = false; say('');

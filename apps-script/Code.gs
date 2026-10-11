@@ -25,3 +25,22 @@ function doPost(e) {
     lock.releaseLock();
   }
 }
+
+// Public, privacy-safe stats for the website's live counter:
+// total count + the latest few registrations (first name and course only).
+function doGet(e) {
+  const sh = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+  const n = Math.max(sh.getLastRow() - 1, 0);
+  const recent = [];
+  if (n > 0) {
+    const from = Math.max(2, sh.getLastRow() - 4);
+    const rows = sh.getRange(from, 1, sh.getLastRow() - from + 1, 5).getValues();
+    rows.reverse().forEach(r => recent.push({
+      name: String(r[1]).trim().split(/\s+/)[0],
+      course: r[4],
+      at: new Date(r[0]).toISOString()
+    }));
+  }
+  return ContentService.createTextOutput(JSON.stringify({ count: n, recent: recent }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
