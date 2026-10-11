@@ -176,6 +176,7 @@
   // EDIT THESE TWO LINES (see SETUP.md)
   const WHATSAPP = '918179028339';   // country code + number, digits only
   const SHEET_URL = '';              // paste the Google Apps Script web-app URL here
+  const NOTIFY_EMAIL = 'gondinigarilakshmiprasad996@gmail.com'; // used only while SHEET_URL is empty
 
   const form = document.getElementById('reg');
   if (!form) return;
@@ -227,13 +228,23 @@
     btn.disabled = true; say('Registering…');
     const msg = `Hi, I'm ${d.name}. I just registered for the free ${d.course} class (${d.level}, ${d.time}). My email: ${d.email}`;
     let saved = false;
-    if (SHEET_URL) {
-      try {
-        // no-cors: the Apps Script reply is opaque, but the row is written
-        await fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams({ ...d, page: location.href }) });
+    const payload = { ...d, page: location.href };
+    try {
+      if (SHEET_URL) {
+        // Google Sheet (opens as Excel). no-cors: reply is opaque but the row is written.
+        await fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(payload) });
         saved = true; stats();
-      } catch (err) { saved = false; }
-    }
+      } else if (NOTIFY_EMAIL) {
+        // No sheet yet: email every registration to the owner in real time (FormSubmit, no sign-up).
+        const r = await fetch('https://formsubmit.co/ajax/' + encodeURIComponent(NOTIFY_EMAIL), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ ...payload, _subject: 'New free-class registration: ' + d.name, _template: 'table', _captcha: 'false' })
+        });
+        const j = await r.json().catch(() => ({}));
+        saved = r.ok && String(j.success) !== 'false';
+      }
+    } catch (err) { saved = false; }
     btn.disabled = false; say('');
     form.innerHTML = `<div class="reg-done"><div style="font-size:2.6rem">🎉</div>
       <h3>${saved ? "You're registered, " + d.name.split(' ')[0] + '!' : 'One more step, ' + d.name.split(' ')[0]}</h3>
