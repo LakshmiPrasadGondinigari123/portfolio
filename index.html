@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=old3">
+<link rel="stylesheet" href="style.css?v=reg1">
 </head>
 <body>
 <div class="progress" id="progress"></div>
@@ -25,6 +25,7 @@
   <nav>
     <button class="burger" id="burger" aria-label="Menu"><i></i><i></i></button>
     <ul id="menu">
+      <li><a href="#classes">Free Classes</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -45,7 +46,8 @@
     <p class="typed">I build <span id="typed"></span><span class="caret">|</span></p>
     <p class="lead">Currently shipping GenAI and Python solutions at <b>EXL</b>. MCA graduate (CGPA 9.24) with 3 internships, turning LLMs, computer vision and backends into production-minded AI applications.</p>
     <div class="cta">
-      <a class="btn primary" href="#projects">View my work</a>
+      <a class="btn primary" href="#classes">Join free classes</a>
+      <a class="btn ghost" href="#projects">View my work</a>
       <a class="btn ghost" href="resume.pdf" download>Download résumé ↓</a>
     </div>
     <div class="socials">
@@ -103,6 +105,54 @@
       <div class="card reveal tilt"><h3>🧩 GenAI + backend in one person</h3><p>I connect LLM workflows (LangChain, OpenAI, Claude) to production-style FastAPI + MySQL services, end to end.</p></div>
       <div class="card reveal tilt"><h3>📈 Measurable impact mindset</h3><p>Every project I list has a number attached: latency, accuracy, hours saved. I build to move metrics.</p></div>
       <div class="card reveal tilt"><h3>⚡ Fast, certified learner</h3><p>9.24 CGPA MCA, Claude Certified Architect (Foundations) and verified HackerRank, Cisco, NASSCOM and Wipro certificates, all shown below.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE CLASSES -->
+<section id="classes">
+  <div class="wrap">
+    <h2 class="title reveal"><small>free classes</small>Learn SQL, Python, ML &amp; GenAI. Free.</h2>
+    <div class="classes-grid">
+      <div class="reveal">
+        <p class="lead">Beginner-friendly, hands-on sessions taught by a working GenAI developer. Pick your topic, register in 30 seconds, and I'll message you on WhatsApp with the batch details.</p>
+        <ul class="course-list">
+          <li><span>🗄️</span><div><b>SQL</b><small>Queries, joins, window functions, real datasets</small></div></li>
+          <li><span>🐍</span><div><b>Python</b><small>From basics to Pandas, NumPy and automation</small></div></li>
+          <li><span>📈</span><div><b>Machine Learning</b><small>Scikit-learn, model building and evaluation</small></div></li>
+          <li><span>🧠</span><div><b>Deep Learning</b><small>Neural networks, TensorFlow, computer vision</small></div></li>
+          <li><span>🤖</span><div><b>Artificial Intelligence</b><small>Concepts, NLP and practical AI projects</small></div></li>
+          <li><span>✨</span><div><b>Generative AI</b><small>LLMs, prompt engineering, LangChain, agents</small></div></li>
+        </ul>
+      </div>
+      <form class="card reveal" id="reg" novalidate>
+        <h3>Reserve your free seat</h3>
+        <label>Full name<input name="name" autocomplete="name" required placeholder="Your name"></label>
+        <label>WhatsApp number<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="+91 98765 43210"></label>
+        <label>Email<input name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+        <label>I want to learn
+          <select name="course" required>
+            <option value="">Select a course</option>
+            <option>SQL</option><option>Python</option><option>Machine Learning</option>
+            <option>Deep Learning</option><option>Artificial Intelligence</option><option>Generative AI</option>
+            <option>Complete roadmap (all of them)</option>
+          </select>
+        </label>
+        <label>Your level
+          <select name="level" required>
+            <option value="">Select your level</option>
+            <option>Complete beginner</option><option>Some knowledge</option><option>Working professional</option>
+          </select>
+        </label>
+        <label>Preferred time
+          <select name="time">
+            <option>Weekday evening</option><option>Weekday morning</option><option>Weekend</option><option>Any time</option>
+          </select>
+        </label>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn primary" type="submit" id="regbtn">Register for free</button>
+        <p class="note" id="regnote" role="status"></p>
+      </form>
     </div>
   </div>
 </section>
@@ -355,8 +405,9 @@
 
 <div class="lb" id="lb" hidden><button class="lbx" id="lbx" aria-label="Close">✕</button><img id="lbi" alt=""><p id="lbc"></p></div>
 <footer>© <span id="yr"></span> Lakshmi Prasad Gondinigari · Handcrafted with HTML, CSS &amp; JS</footer>
+<a class="wa" id="wa" href="https://wa.me/918179028339" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3C9 3 3.4 8.6 3.4 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-1.9a12.5 12.5 0 0 0 5.6 1.4c6.9 0 12.6-5.600 12.600-12.500S22.900 3 16 3Zm0 22.800c-1.800 0-3.500-.5-5-1.400l-.4-.2-4.400 1.100 1.200-4.200-.3-.4a10.200 10.200 0 0 1-1.600-5.500c0-5.700 4.600-10.200 10.300-10.200S26.100 9.800 26.100 15.500 21.700 25.800 16 25.800Zm5.600-7.600c-.3-.2-1.800-.9-2.100-1s-.5-.2-.7.200-.8 1-1 1.200-.4.200-.7.100a8.300 8.300 0 0 1-4.100-3.600c-.3-.5.300-.5.900-1.600.1-.2 0-.4 0-.5l-1-2.300c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400s-1 1-1 2.500 1.100 2.900 1.200 3.100 2.100 3.200 5.100 4.500c1.900.8 2.600.9 3.600.7.600-.1 1.800-.7 2-1.400s.2-1.300.2-1.400-.3-.2-.6-.4Z"/></svg><span>Chat on WhatsApp</span></a>
 <a class="hire" href="#contact">👋 Hire me</a>
 <button class="top" id="top" aria-label="Back to top">↑</button>
-<script src="script.js?v=old3"></script>
+<script src="script.js?v=reg1"></script>
 </body>
 </html>

@@ -170,3 +170,53 @@
     fallback('Portfolio message from ' + f.get('name'), f.get('msg') + '\n\n— ' + f.get('name') + ' (' + f.get('email') + ')');
   });
 })();
+
+// ---- free-class registration -> Google Sheet (opens as Excel) + WhatsApp ----
+(() => {
+  // EDIT THESE TWO LINES (see SETUP.md)
+  const WHATSAPP = '918179028339';   // country code + number, digits only
+  const SHEET_URL = '';              // paste the Google Apps Script web-app URL here
+
+  const form = document.getElementById('reg');
+  if (!form) return;
+  const note = document.getElementById('regnote'), btn = document.getElementById('regbtn');
+  const say = (t, err) => { note.textContent = t; note.classList.toggle('err', !!err); };
+
+  const waLink = (text) => 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(text);
+  document.getElementById('wa').href = waLink('Hi Lakshmi Prasad, I saw your website and I am interested in the free classes.');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = new FormData(form);
+    if (f.get('website')) return; // honeypot: bots only
+    const d = Object.fromEntries([...f].filter(([k]) => k !== 'website'));
+    d.name = (d.name || '').trim(); d.phone = (d.phone || '').trim(); d.email = (d.email || '').trim();
+
+    let bad = false;
+    [...form.elements].forEach(el => el.classList && el.classList.remove('bad'));
+    const flag = n => { form.elements[n].classList.add('bad'); bad = true; };
+    if (d.name.length < 2) flag('name');
+    if (d.phone.replace(/\D/g, '').length < 10) flag('phone');
+    if (!/^\S+@\S+\.\S+$/.test(d.email)) flag('email');
+    if (!d.course) flag('course');
+    if (!d.level) flag('level');
+    if (bad) return say('Please fix the highlighted fields.', true);
+
+    btn.disabled = true; say('Registering…');
+    const msg = `Hi, I'm ${d.name}. I just registered for the free ${d.course} class (${d.level}, ${d.time}). My email: ${d.email}`;
+    let saved = false;
+    if (SHEET_URL) {
+      try {
+        // no-cors: the Apps Script reply is opaque, but the row is written
+        await fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams({ ...d, page: location.href }) });
+        saved = true;
+      } catch (err) { saved = false; }
+    }
+    btn.disabled = false; say('');
+    form.innerHTML = `<div class="reg-done"><div style="font-size:2.6rem">🎉</div>
+      <h3>${saved ? "You're registered, " + d.name.split(' ')[0] + '!' : 'One more step, ' + d.name.split(' ')[0]}</h3>
+      <p>${saved ? 'Tap below to confirm on WhatsApp and get the batch details and class link.'
+                 : 'Tap below to send your registration on WhatsApp so I can add you to the batch.'}</p>
+      <a class="btn wa-btn" target="_blank" rel="noopener" href="${waLink(msg)}">Confirm on WhatsApp</a></div>`;
+  });
+})();
