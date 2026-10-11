@@ -11,8 +11,8 @@ that is sent to the student's number automatically.
    messages up to 5 numbers you verify, so it is only for testing.
 4. A **message template** (WhatsApp Manager > Message templates), category *Utility*, language English:
 
-   > Hi {{1}}, you are registered for the free {{2}} class. I will share the batch time and class
-   > link here shortly. Reply to this message with any doubts. - Lakshmi Prasad
+   > Hi {{1}}, thanks for registering for our free {{2}} course! We will be sharing the batch details
+   > shortly. Please stay tuned. - Lakshmi Prasad
 
 5. A **permanent access token**: Business Settings > System users > add a system user >
    generate token with `whatsapp_business_messaging` permission.

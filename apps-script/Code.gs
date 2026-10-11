@@ -33,8 +33,7 @@ function doPost(e) {
     const p = e.parameter;
     const first = String(p.name || '').trim().split(/\s+/)[0] || 'there';
     const num = waNumber_(p.phone);
-    const welcome = 'Hi ' + first + '! This is ' + OWNER_NAME + '. Thanks for registering for the free ' + p.course +
-      ' class. I will share the batch details here shortly. Feel free to ask any doubts.';
+    const welcome = 'Hi ' + first + '! Thanks for registering for our free ' + p.course + ' course. We will be sharing the batch details shortly. Please stay tuned! - ' + OWNER_NAME;
     const waLink = num ? 'https://wa.me/' + num + '?text=' + encodeURIComponent(welcome) : '';
 
     sh.appendRow([new Date(), p.name, "'" + p.phone, p.email, p.course, p.level, p.time, p.page, waLink]);
@@ -62,7 +61,7 @@ function doPost(e) {
             '<tr><td style="padding:8px 0;color:#5b6280">Your level</td><td>' + esc_(p.level) + '</td></tr>' +
             '<tr><td style="padding:8px 0;color:#5b6280">Preferred time</td><td>' + esc_(p.time) + '</td></tr>' +
             '<tr><td style="padding:8px 0;color:#5b6280">WhatsApp</td><td>' + esc_(p.phone) + '</td></tr></table>' +
-            '<p><b>What happens next?</b><br>I will message you on WhatsApp with the batch time and class link.</p>' +
+            '<p><b>What happens next?</b><br>We will be sharing the batch details shortly on WhatsApp and email. Please stay tuned!</p>' +
             '<p><a href="https://wa.me/' + OWNER_WA + '" style="display:inline-block;background:#25d366;color:#04130c;text-decoration:none;font-weight:bold;padding:12px 22px;border-radius:10px">Chat with me on WhatsApp</a></p>' +
             '<p style="color:#5b6280;font-size:13px">— ' + OWNER_NAME + '<br>Python &amp; GenAI Developer · <a href="' + SITE + '">' + SITE + '</a></p>' +
             '</div></div>'
