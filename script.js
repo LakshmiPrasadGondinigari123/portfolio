@@ -175,7 +175,7 @@
 (() => {
   // EDIT THESE TWO LINES (see SETUP.md)
   const WHATSAPP = '918179028339';   // country code + number, digits only
-  const SHEET_URL = '';              // paste the Google Apps Script web-app URL here
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbx1Wpehe_DWI405TZTY2P2_m3vedQtu5Hn6A0kSR-9FY2LACCMvKs7P_Xc8Q_flHGJ-/exec';              // paste the Google Apps Script web-app URL here
   const NOTIFY_EMAIL = 'gondinigarilakshmiprasad996@gmail.com'; // used only while SHEET_URL is empty
 
   const form = document.getElementById('reg');
